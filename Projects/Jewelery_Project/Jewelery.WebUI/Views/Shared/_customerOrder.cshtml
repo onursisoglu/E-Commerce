@@ -1,0 +1,43 @@
+﻿@model CustomerInfoViewModel
+<style>
+    .w3-animate-bottom tr td input {
+        width: 17% !important;
+        text-align: center;
+    }
+
+    .w3-animate-bottom tr td {
+        vertical-align: baseline !important;
+        width:15%;
+    }
+
+        .w3-animate-bottom tr td img {
+            height: 100px;
+        }
+</style>
+
+        <text><h2>SİPARİŞLERİM</h2></text>
+        <table class="table w3-animate-bottom">
+            <tr>
+                <td>ÜRÜN ADI</td>
+                <td>ADET FİYATI</td>
+                <td>ADET</td>
+                <td>TOPLAM FİYAT</td>
+                <td>SİPARİŞ TARİHİ</td>
+            </tr>
+            <tbody>
+                @foreach (var item in Model.ordersDTo)
+                {
+                    <tr>
+                      <td><span><img src="@item.ProductPhoto"/></span><span>@item.ProductName</span></td>
+                       
+                        <td><span>@item.UnitPrice</span></td>
+                        <td><span>@item.Quantity</span></td>
+                        <td><span>@item.TotalPrice</span></td>
+                        <td><span>@item.AddedDate.Value.ToShortDateString()</span></td>
+                    </tr>
+                }
+                    
+
+
+            </tbody>
+        </table>

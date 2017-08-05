@@ -1,0 +1,87 @@
+﻿@model AdminViewModel
+
+<section class="panel">
+    <header class="panel-heading label-success">
+        Ürünler
+    </header>
+    <div class="panel-body">
+        <div class="adv-table editable-table ">
+            <br />
+            <div class="clearfix">
+                <div class="btn-group">
+                    @using (Ajax.BeginForm("AddProduct", "AdminProduct", new AjaxOptions { OnSuccess = "PartialData", HttpMethod = "Get" }))
+                    {
+                        <button type="submit" class="w3-button w3-round-large w3-deep-orange ">
+                            Yeni Ürün <i class="icon-plus"></i>
+                        </button>
+                    }
+
+                </div>
+            </div>
+            <br />
+            <div class="space15"></div>
+            <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                <thead>
+                    <tr>
+                        <th>Ürün Adı</th>
+                        <th>Açıklaması</th>
+                        <th>Stok Sayısı</th>
+                        <th>İndirim Oranı</th>
+                        <th>Ağırlığı</th>
+                        <th>Birim Fiyatı</th>
+                        <th>Eklenme Tarihi</th>
+                        <th>Durumu</th>
+                        <th>Güncelle</th>
+                        <th>Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model.ProductList)
+                    {
+                        <tr class="">
+                            <td>@product.ProductName</td>
+                            <td>@product.Description</td>
+                            <td>@product.UnitsInStock</td>
+                            @if (product.Discount != null)
+                            {
+                                <td class="center">@product.Discount</td>
+                            }
+                            else
+                            {
+                                <td class="center">İndirim Yok</td>
+                            }
+
+                            <td>@product.Weight</td>
+                            <td>@product.UnitPrice</td>
+                            <td>@product.AddedDate</td>
+                            <td>@product.IsActive</td>
+                            <td>
+                                @using (Ajax.BeginForm("ProductUpdate", "AdminProduct", new AjaxOptions { OnSuccess = "PartialData",HttpMethod="Get" }))
+                                {
+                                    <button name="ProductID" value="@product.ProductID" type="submit" class="w3-button w3-round-large w3-light-blue w3-hover-deep-orange ">
+                                        <i class="icon-pencil"></i>
+                                    </button>
+                                }
+                                
+                            </td>
+                            <td>
+                                <button name="ProductID" value="@product.ProductID" type="submit" class="w3-button w3-round-large w3-button w3-round-large w3-deep-orange w3-hover-red ">
+                                    <i class="icon-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<script>
+    function PartialData(data) {
+        debugger
+        $("#main-content").html('');
+        $("#main-content").html(data);
+    }
+</script>

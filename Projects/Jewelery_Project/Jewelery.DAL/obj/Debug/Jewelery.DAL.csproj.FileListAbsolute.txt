@@ -1,0 +1,10 @@
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.DAL\bin\Debug\Jewelery.DAL.dll.config
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.DAL\bin\Debug\Jewelery.DAL.dll
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.DAL\bin\Debug\Jewelery.DAL.pdb
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.DAL\bin\Debug\EntityFramework.dll
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.DAL\bin\Debug\EntityFramework.xml
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.DAL\obj\Debug\Jewelery.DAL.csprojResolveAssemblyReference.cache
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.DAL\obj\Debug\Jewelery.DAL.dll
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.DAL\obj\Debug\Jewelery.DAL.pdb

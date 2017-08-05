@@ -1,0 +1,48 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin Login</title>
+    <link href="~/Areas/Admin/Content/AdminPaneli/css/style.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/AdminPaneli/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/AdminPaneli/css/bootstrap-reset.css" rel="stylesheet" />
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/Content/AdminPaneli/css/style-responsive.css" rel="stylesheet" />
+</head>
+<body class="login-body">
+    <div class="container">
+        @*class="form-signin"*@
+        @using (Html.BeginForm("Index", "AdminLogin", FormMethod.Post, new { @class = "form-signin" }))
+        {
+            <h2 class="form-signin-heading">sign in now</h2>
+            <div class="login-wrap">
+                <input type="text" name="Email" class="form-control" placeholder="E-mail Adresiniz" autofocus>
+                <input type="password" name="Password" class="form-control" placeholder="Şifreniz">
+                <label class="checkbox">
+                    <input type="checkbox" value="remember-me"> Remember me
+                    <span class="pull-right">
+                        <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
+                    </span>
+                </label>
+                <button class="btn btn-lg btn-login btn-block" type="submit">Giriş Yap</button>
+            </div>
+        }
+        <br />
+        @if (ViewData["Message"] != null)
+        {
+            <div class="alert alert-danger col-md-6 col-lg-6 col-lg-offset-3 col-md-offset-3 text-center">
+                <strong>@ViewData["Message"]</strong>
+            </div>
+
+        }
+    </div>
+    
+    
+</body>
+</html>

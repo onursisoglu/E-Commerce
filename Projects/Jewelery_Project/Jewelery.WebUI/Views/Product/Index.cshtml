@@ -1,0 +1,187 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Sablon.cshtml";
+}
+
+@model ProductDetailViewModel
+
+
+
+
+@* Side Kategori*@
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-3 col-lg-3">
+            <div class="w3-border-bottom w3-margin-bottom">
+                <h4>Kategoriler</h4>
+            </div>
+            @foreach (var item in Model.CategoryDTO)
+            {
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse-@item.CategoryID">@item.CategoryName</a>
+                            </h4>
+                        </div>
+
+                        <div id="collapse-@item.CategoryID" class="panel-collapse collapse">
+                            <ul class="list-group">
+                                @foreach (var itemm in Model.SubCategoryDTO.Where(c => c.CategoryID == item.CategoryID).ToList())
+                                {
+                                    if (itemm.GemDTO != null)
+                                    {
+                                        <li class="list-group-item"><a href="@Url.Action("CategoryProduct","Product",new { id = itemm.SubCategoryID })">@itemm.GemDTO.GemName @item.CategoryName</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="list-group-item"><a href="@Url.Action("CategoryProduct","Product",new { id = itemm.SubCategoryID})">@itemm.MineDTO.MineName @item.CategoryName</a></li>
+
+                                    }
+                                }
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+            }
+        </div>
+
+
+        <div class="col-md-9 col-lg-9">
+            <div class="row w3-border-bottom w3-margin-bottom">
+                <h4 style="float:left;">Fiyata Göre Sırala</h4>
+                @using (Ajax.BeginForm("CategoryProduct", "Product", new AjaxOptions { OnSuccess = "SortResult" }))
+                {
+                    <input type="hidden" id="@Model.Product.SubCategoryID" />
+                    <button class="pull-right w3-btn w3-transparent w3-text-black w3-hover-none w3-hover-text-indigo" value="asc" name="sort" type="submit"><i class="fa fa-long-arrow-up"></i>Fiyata Göre(Artan)</button>
+                    <button class="pull-right w3-btn w3-transparent w3-text-black w3-hover-none w3-hover-text-indigo" value="desc" name="sort" type="submit"><i class="fa fa-long-arrow-down"></i>Fiyata Göre(Azalan)</button>
+                }
+
+            </div>
+
+            @* Kategoriye Göre PRODUCT LİST*@
+
+            <div id="sortdiv" class="row">
+                @{
+                    CustomerDTO ct = Session["Customer"] as CustomerDTO;
+
+                }
+
+                @if (Model.ProductList.Count == 0)
+                {
+                    <div class="alert alert-danger">
+                        Kategoride Ürün Bulunamadı. <a href="@Url.Action("Index","Home")" class="alert-link">Anasayfaya Dönmek İçin Tıklayınız</a>.
+                    </div>
+                }
+
+
+                @foreach (var item in Model.ProductList)
+                {
+
+                    <div style="background: #fff">
+
+                        <div class="product productdiv w3-hover-shadow col-md-3 col-lg-3 w3-margin-right">
+
+                            <div class="w3-display-container">
+                                <a href="#"><img src="@item.ProductPhoto"></a>
+
+                                @*Sepete Ekle*@
+                                <div style="margin-top:41px !important" class="w3-display-middle w3-margin-top w3-margin-left w3-display-hover w3-large">
+                                    @using (Ajax.BeginForm("AddShoppingCart", "Shopping", new AjaxOptions { OnSuccess = "Calculate" }))
+                {
+                    if (ct != null)
+                    {
+                                            <input type="hidden" value="@ct.CustomerID" name="CustomerID" />
+                                        }
+                                        else
+                                        {
+                                            <input type="hidden" value="" name="CustomerID" />
+                                        }
+                                        <input type="hidden" value="@item.ProductID" name="ProductID" />
+                                                <button type="submit" class="w3-transparent w3-btn w3-hover-none"><i style="margin-right:45px;" class="fa fa-shopping-cart w3-text-grey"></i></button>
+                                    }
+                                </div>
+
+                                @* Favori Ürünler *@
+                                <div style="margin-top:41px !important;margin-left:25px;" class="w3-display-middle w3-margin-right w3-display-hover w3-large">
+                                    @using (Ajax.BeginForm("FavProduct", "Product", new AjaxOptions { OnSuccess = "favorite" }))
+                {
+
+
+                    if (ct != null)
+                    {
+
+                        if (ct.FavoriteProductsDTO.Any(c => c.ProductID == item.ProductID && c.IsActive == true))
+                        {
+
+                                                <button type="submit" class="w3-transparent btn w3-hover-none"><i id="btn-@item.ProductID" class="fa fa-heart w3-text-red"></i></button>
+                                            }
+
+                                            else
+                                            {
+
+                                                <button type="submit" class="w3-transparent btn w3-hover-none"><i id="btn-@item.ProductID" class="fa fa-heart"></i></button>
+                                            }
+                                            <input type="hidden" value="@item.ProductID" name="ProductID" />
+                                                    <input type="hidden" value="@ct.CustomerID" name="CustomerID" />
+                                        }
+
+                                        else
+                                        {
+                                            <button type="button" class="w3-transparent btn w3-hover-none"><i class="fa fa-heart"></i></button>
+                                        }
+
+                                    }
+
+                                </div>
+
+                                @using (Html.BeginForm("ProductDetail", "Product", new { subcategoryID = item.SubCategoryID, id = item.ProductID }))
+                                {
+                                    <div class="w3-display-middle w3-display-hover w3-large">
+                                        <button type="submit" class="w3-light-grey w3-btn w3-hover-black w3-hover-text-white">DETAYINA GİT</button>
+                                    </div>
+                                }
+                                @if (item.Discount != null)
+                                {
+
+                                    decimal? yeniFiyat = item.UnitPrice - (item.UnitPrice * item.Discount);
+
+                                    <div class="w3-display-topright discount-tag">@item.Discount.ToString().Replace("0,", "%")</div>
+
+                                            <div id="urunInfo">
+                                                <a href="@Url.Action("ProductDetail","Product",new { subcategoryID=item.SubCategoryID, id = item.ProductID })"><strong>@item.ProductName</strong></a>
+                                                <div><s style="font-size:9px"> Eski Fiyatı : @item.UnitPrice.Value.ToString("C")</s></div>
+                                                <div class="clearfix"></div>
+                                                <strong style="background-color:#f62a2a;color:white;font-size:10px">İndirimli Fiyatı : @yeniFiyat.Value.ToString("c")</strong>
+                                            </div>
+                                }
+                                else
+                                {
+                                    <div id="urunInfo">
+                                        <a href="@Url.Action("ProductDetail","Product",new { subcategoryID=item.SubCategoryID, id = item.ProductID })"><strong>@item.ProductName</strong></a>
+                                        <h6><strong> @item.UnitPrice.Value.ToString("C")</strong></h6>
+                                    </div>
+                                }
+                            </div>
+
+                        </div>
+
+                        <input type="hidden" name="id" value="@item.SubCategoryID" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="hoop" class="col-lg-offset-4 col-lg-4 col-md-4 w3-grey animated zoomIn" style="display:none; position:fixed;margin:0;width:197px;z-index:1; border-radius:5px;font-size:14px;margin:-51% 16% auto 82%"><label style="color:white;text-align:center;">Ürün Sepetinize Eklendi</label></div>
+
+
+
+

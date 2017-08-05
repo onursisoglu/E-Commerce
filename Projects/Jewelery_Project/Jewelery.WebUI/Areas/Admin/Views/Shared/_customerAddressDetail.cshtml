@@ -1,0 +1,46 @@
+﻿@model List<AddressDTO>
+<section class="panel">
+    <header class="panel-heading label-success">
+        Ürünler
+    </header>
+    <div class="panel-body">
+        <div class="adv-table editable-table ">
+            <br />
+            <div class="space15"></div>
+            <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                <thead>
+                    <tr>
+                        <th>Adres ID</th>
+                        <th>Şehir</th>
+                        <th>İlçe</th>
+                        <th>Açık Adres</th>
+                        <th>Ülke</th>
+                        <th>Eklenme Tarihi</th>
+                        <th>Güncellenme Tarihi</th>
+                        <th>Silinme Tarihi</th>
+                        <th>Durumu</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var adres in Model)
+                    {
+                        <tr class="">
+                            <td>@adres.AddressID</td>
+                            <td>@adres.City</td>
+                            <td>@adres.District</td>
+                            <td>@adres.Address1</td>
+                            <td>@adres.Country</td>
+                            <td>@adres.AddedDate</td>
+                            <td>@adres.UpdateDate</td>
+                            <td>@adres.DeletedDate</td>
+                            <td>@adres.IsActive</td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

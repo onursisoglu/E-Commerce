@@ -1,0 +1,242 @@
+﻿@model ProductDetailViewModel
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_Sablon.cshtml";
+}
+
+
+@{CustomerDTO ct = Session["Customer"] as CustomerDTO; }
+
+@* Ürün Detay Sayfası *@
+<div class="container">
+    <div style="background:#fff;" class="w3-border row w3-margin-top w3-margin-bottom">
+
+        <div class="col-lg-6 col-md-6">
+            <div class="row">
+                <div class="col-sm-10 col-xs-12 col-sm-offset-1">
+                    <div style="width:400px;height:400px" class="w3-margin-top panel panel-default">
+                       
+                            <img style="width:84%" id="imgMain" src="@Model.Product.ProductPhoto" class="w3-margin col-sm-12 col-xs-12">
+                        
+                    </div>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row  w3-margin-bottom w3-margin-top">
+                <div class="col-md-3 hidden-sm hidden-xs"></div>
+               
+                   @foreach (var item in Model.Product.ProductPicturesDTO)
+                    {
+                        <div class="col-md-2 col-sm-3 col-xs-3">
+                            <img src="@item.PictureURL" class="col-sm-12 col-xs-12 img-thumbnail" onmouseover="change('@item.PictureURL')">
+                        </div>
+                    }
+              
+               
+
+
+
+                <div class="col-md-2 col-sm-3 col-xs-3"></div>
+            </div>
+        </div>
+        <div class="w3-border col-lg-6 col-md-6">
+            <h1>@Model.Product.ProductName</h1>
+            <div class="w3-margin-bottom">
+                <strong>@Model.Product.UnitPrice</strong><br />
+                <small>KREDİ KARTI FİYATI</small>
+            </div>
+
+            @* Sepete Ekleme *@
+
+            @using (Ajax.BeginForm("AddShoppingCart", "Shopping", new AjaxOptions { OnSuccess = "Calculate" }))
+            {
+                if (ct != null)
+                {
+                    <input type="hidden" value="@ct.CustomerID" name="CustomerID" />
+                }
+                else
+                {
+                    <input type="hidden" value="" name="CustomerID" />
+                }
+                <input type="hidden" value="@Model.Product.ProductID" name="ProductID" />
+                <button class="w3-btn w3-margin-right" type="submit">SATIN AL</button>
+
+            }
+
+            @* Favorilere Ekleme *@
+
+            @using (Ajax.BeginForm("FavProduct", "Product", new AjaxOptions { OnSuccess = "detailFavorite" }))
+            {
+
+                if (ct != null)
+                {
+
+                    if (ct.FavoriteProductsDTO.Any(c => c.ProductID == Model.Product.ProductID && c.IsActive == true))
+                    {
+
+                        <button id="btn" type="submit" class="w3-transparent btn w3-hover-none"><i class="fa fa-heart w3-text-red"></i>Favori Ürününüz</button>
+                    }
+
+                    else
+                    {
+
+                        <button id="btn" type="submit" class="w3-transparent btn w3-hover-none"><i class="fa fa-heart"></i>Favori Ürünlerime Ekle</button>
+                    }
+                    <input type="hidden" value="@Model.Product.ProductID" name="ProductID" />
+                    <input type="hidden" value="@ct.CustomerID" name="CustomerID" />
+                }
+
+                else
+                {
+                    <button type="button" class="w3-transparent btn w3-hover-none"><i class="fa fa-heart"></i>Favori Ürünlerime Ekle</button>
+                }
+
+            }
+            <div class="w3-margin-top col-md-4 col-lg-4 w3-border-right">
+                <ul class="nav">
+                    <li><i class="fa fa-truck w3-margin-right"></i>Teslimat Bilgisi</li>
+                    <li><img src="http://i.hizliresim.com/X0MLk5.png" />100% GÜVENLİ ALIŞVERİŞ</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    @*Ürün Açıklama*@
+
+    <div class="row" style="margin-top:70px;">
+        <div class="col-md-8 col-lg-8">
+            <ul class="nav nav-tabs w3-blue w3-hover-text-white">
+                <li class="active w3-hover-border-blue"><a class="w3-hover-border-blue" data-toggle="tab" href="#home">ÜRÜN AÇIKLAMASI</a></li>
+                <li><a class="w3-hover-border-blue" data-toggle="tab" href="#menu1">ÜRÜN DETAYLARI</a></li>
+                <li><a class="w3-hover-border-blue" data-toggle="tab" href="#menu2">MÜŞTERİ YORUMLARI</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                    <h3>@Model.Product.Description</h3>
+                    <p></p>
+                </div>
+                <div id="menu1" class="tab-pane fade">
+                    <table class="table table-responsive">
+                        <tbody>
+                            <tr>
+                                <th>Ürün Kodu</th>
+                                <td>1231244352134</td>
+                            </tr>
+                            <tr>
+                                <th>Ürün Kodu</th>
+                                <td>1231244352134</td>
+                            </tr>
+                            <tr>
+                                <th>Ürün Kodu</th>
+                                <td>1231244352134</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="menu2" class="tab-pane fade">
+                    <button class="btn btn-md w3-orange w3-text-white w3-margin-top" data-toggle="collapse" data-target="#comment"><i class="glyphicon glyphicon-comment"></i> Yorum Yap</button>
+
+                    @* Yorum Ekleme *@
+
+                    @using (Ajax.BeginForm("PostComment", "Product", new AjaxOptions { OnSuccess = "resultComment" }))
+                    {
+                        <div id="comment" style="padding-bottom:75px;" class="collapse">
+                            <textarea name="text" style="resize:none;height:100px" class="form-control w3-margin-top" placeholder="Yorumunuz..."></textarea>
+
+                            <input type="hidden" name="pID" value="@Model.Product.ProductID" />
+                            @if (Session["Customer"] != null)
+                            {
+
+                                <input type="hidden" name="cID" value="@ct.CustomerID" />
+                            }
+                            else
+                            {
+                                <div class="alert alert-danger">Yorum Yapabilmeniz İçin Üye Girişi Yapmanız Gerekmektedir</div>
+                                <input type="hidden" name="cID" value="" />
+                            }
+
+                            <button type="submit" name="sasd" class="w3-margin-top w3-button w3-green w3-hover-border-light-green pull-right">Gönder</button>
+
+                        </div>
+                    }
+                    <div class="pull-right">Toplam Yorum Sayısı:</div>
+                    <div class="clearfix"></div>
+                    <div id="yorumcu">
+
+                    </div>
+                    @if (Model.Comments == null)
+                    {
+                        <div class="alert alert-danger">Bu ürün için Yorum Bulunmamaktadır</div>
+                    }
+                    else
+                    {
+                        foreach (var item in Model.Comments)
+                        {
+                            <div style="margin-top:50px;" class="panel">
+                                <div class="media">
+                                    <div style="float:left;" class="panel-heading"><img style="height:20px" src="http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-8/128/User-blue-icon.png" /></div>
+                                    <div class="divider pull-left"><h4>@item.CustomerDTO.Name @item.CustomerDTO.LastName</h4></div><span class="pull-right">@item.AddedDate</span>
+                                    <div class="clearfix"></div>
+                                    <div class="w3-padding-left panel-body">
+                                      <p>@item.Content</p>  
+                                    </div>
+                                    <input type="hidden" value="" name="CommentID" />
+                                    <button class="w3-margin-top pull-right btn btn-default"><i class="fa fa-thumbs-up icon"></i>Beğen</button>
+                                </div>
+                            </div><div class="clearfix"></div>
+
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        @* Ürün Detay Paneli *@
+        <div class="col-md-4 col-lg-4">
+            @if (Model.Product.SubCategoryDTO.GemDTO != null)
+            {
+                <table class="w3-table w3-bordered">
+                    <tr>
+                        <th colspan="4" style="text-align:center;" class="w3-text-blue">Ürün Özellikleri</th>
+                    </tr>
+                    <tr>
+                        <th>Taş</th>
+                        <th>Ağırlık</th>
+                        <th>Renk</th>
+                        <th>Şekil</th>
+                    </tr>
+                    <tr>
+                        <td>@Model.Product.SubCategoryDTO.GemDTO.GemName</td>
+                        <td>@Model.Product.SubCategoryDTO.GemDTO.GemWeight Karat</td>
+                        <td>@Model.Product.SubCategoryDTO.GemDTO.Colour</td>
+                        <td>@Model.Product.SubCategoryDTO.GemDTO.Shape</td>
+                    </tr>
+                </table>
+            }
+        </div>
+    </div>
+    <div id="wdr" class="row">
+
+        <div class="container text-center">
+            @*Home Page Random Product List*@
+
+            <h3>Benzer Ürünler</h3><br>
+
+            <div class="row">
+
+                @foreach (var item in Model.ProductList.Where(c => c.SubCategoryID == Model.Product.SubCategoryID).ToList())
+                {
+                    <div class="col-sm-2 col-md-2 col-lg-2">
+                        <img src="@item.ProductPhoto" class="img-responsive" style="width:100%" alt="Image">
+                        <p>@item.ProductName</p>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="hoop" class="col-lg-offset-4 col-lg-4 col-md-4 w3-grey animated zoomIn" style="display:none; position:fixed;width:197px;z-index:1; border-radius:5px;font-size:14px;margin:-9% auto auto 48%"><label style="color:white;text-align:center;">Ürün Sepetinize Eklendi</label></div>

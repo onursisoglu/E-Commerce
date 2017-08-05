@@ -1,0 +1,43 @@
+﻿@model NavbarViewModel
+
+    @foreach (var item in Model.CategoryList)
+    {
+        <ul class="nav navbar-nav">
+            <li class="dropdown mega-dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">@item.CategoryName<span class="glyphicon glyphicon-chevron-down pull-right"></span></a>
+                <ul class="dropdown-menu mega-dropdown-menu row">
+                    @foreach (var mine in Model.MineList)
+                    {
+                        <li class="col-md-2 col-lg-2 col-sm-2">
+                                <ul>
+                                    <li class="dropdown-header">@mine.MineName</li>
+
+                                   @foreach (var spec in Model.SubCategoryList.Where(x => x.CategoryID == item.CategoryID && x.MineID == mine.MineID))
+                                   {
+                                       if (spec.GemID == null)
+                                       {
+                                            <li><a href="@Url.Action("CategoryProduct","Product",new {id=spec.SubCategoryID})">@mine.MineName @item.CategoryName</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="@Url.Action("CategoryProduct","Product",new {id=spec.SubCategoryID})">@spec.GemDTO.GemName @item.CategoryName</a></li>
+                                        }
+
+
+
+                                    }
+                                </ul>
+                            </li>
+                    }
+                    <li>
+                        <div id="catPicture" class="navbar-nav">
+                            <div class="col-xs-12">
+                                <a href="@item.CategoryID"><img src="@item.Picture" /></a>
+                            </div>
+                        </div>
+                    </li>
+                    
+                </ul>
+            </li>
+        </ul>
+    }

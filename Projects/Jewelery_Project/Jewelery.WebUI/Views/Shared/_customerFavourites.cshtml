@@ -1,0 +1,48 @@
+﻿@model CustomerInfoViewModel
+@{ 
+    CustomerDTO customer = Session["Customer"] as CustomerDTO;
+}
+<style>
+    .w3-animate-bottom tr td {
+        vertical-align: baseline !important;
+        width: 10%;
+    }
+</style>
+<table class="table w3-animate-bottom">
+    <tr>
+        <td>Ürün Resmi</td>
+        <td>ÜRÜN ADI</td>
+        <td>FİYAT</td>
+        <td>İŞLEM</td>
+    </tr>
+    <tbody>
+        @foreach (var item in Model.Customer.FavoriteProductsDTO)
+        {
+            <tr>
+                <td><span><img style="height:100px" src="@item.ProductDTO.ProductPhoto" /></span></td>
+                <td><span>@item.ProductDTO.ProductName</span></td>
+
+                <td><span>@item.ProductDTO.UnitPrice</span></td>
+                <td>
+                    @using (Ajax.BeginForm("AddShoppingCart", "Shopping", new AjaxOptions { OnSuccess = "Calculate" }))
+                {
+                    if (customer != null)
+                    {
+                            <input type="hidden" value="@customer.CustomerID" name="CustomerID" />
+                        }
+                        else
+                        {
+                            <input type="hidden" value="" name="CustomerID" />
+                        }
+                        <input type="hidden" value="@item.ProductID" name="ProductID" />
+                        <button type="submit" class="w3-red w3-btn w3-hover-none">Sepete Ekle <i style="margin:auto ;float:right;" class="fa fa-shopping-cart w3-text-white"></i></button>
+                    }
+                </td>
+            </tr>
+        }
+
+
+
+    </tbody>
+</table>
+

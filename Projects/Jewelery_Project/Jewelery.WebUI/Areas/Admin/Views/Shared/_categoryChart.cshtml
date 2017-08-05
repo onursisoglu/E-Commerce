@@ -1,0 +1,43 @@
+﻿
+<div id="donut-example"></div>
+
+
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://cdn.oesmith.co.uk/morris-0.4.1.min.js"></script>
+    <meta charset=utf-8 />
+    <script>
+        $(document).ready(function () {
+
+            $.getJSON('http://localhost:13806/api/default/CategoryReport', function (response) {
+                debugger
+                var mydata = [];
+                for (var i = 0; i < response.length; i++) {
+                    var obj = { label: response[i].CategoryName, value: response[i].Persentage }
+                    mydata.push(obj);
+                }
+
+                //chart için Random Renk oluştur
+                var letters = '0123456789ABCDEF';
+                var color = [];
+                var c = "#";
+                for (var j = 0; j < mydata.length; j++) {
+                    for (var i = 0; i < 6; i++) {
+                        c += letters[Math.floor(Math.random() * 16)];
+                        if (i == 5) {
+                            color.push(c);
+                            c = "#";
+                        }
+                    }
+                }
+
+                Morris.Donut({
+                    element: 'donut-example',
+                    data: mydata,
+                    colors:color
+
+                });
+            });
+        });
+    </script>

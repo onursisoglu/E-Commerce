@@ -1,0 +1,66 @@
+﻿@model AdminViewModel
+
+<section class="panel">
+    <header class="panel-heading label-success">
+        Kullanıcılar
+    </header>
+    <div class="panel-body">
+        <div class="adv-table editable-table ">
+            <br />
+            <br />
+            <div class="space15"></div>
+            <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                <thead>
+                    <tr>
+                        <th>Kullanıcı ID</th>
+                        <th>Kullanıcı Adı</th>
+                        <th>Kullanıcı Soyadı</th>
+                        <th>Kullanıcı Email</th>
+                        <th>Kullanıcı Şifre</th>
+                        <th>Kullanıcı Doğum Tarihi</th>
+                        <th>Kullanıcı Telefonu</th>
+                        <th>Kullanıcı Kayıt Tarihi</th>
+                        <th>Toplam Harcama</th>
+                        <th>Adres Bilgisi</th>
+                        <th>Durum</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var customer in Model.CustomerList)
+                    {
+                        decimal totalprice = 0;
+                        <tr class="">
+                            <td>@customer.CustomerID</td>
+                            <td>@customer.Name</td>
+                            <td>@customer.LastName</td>
+                            <td class="center">@customer.Email</td>
+                            <td>@customer.Password</td>
+                            <td>@customer.BirthDate</td>
+                            <td>@customer.Phone</td>
+                            <td>@customer.AddedDate</td>
+                            @foreach (var item in customer.OrdersDTO)
+                            {
+                                totalprice += item.OrderDetailsDTO.Sum(x => x.TotalPrice.Value);
+
+                            }
+                            <td>
+                                @totalprice
+                            </td>
+                            <td>
+                                @using (Ajax.BeginForm("AddresDetail", "AdminHome", new AjaxOptions { OnSuccess = "PartialData" }))
+                                {
+                                    <button class="w3-button w3-round-large w3-light-blue w3-hover-deep-orange" type="submit" value="@customer.CustomerID" name="CustomerID"><i class="icon-eye-open"></i> Görüntüle</button>
+                                }
+                            </td>
+                            <td>@customer.IsActive</td>
+
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

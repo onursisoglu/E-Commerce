@@ -1,0 +1,246 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <link href="~/Content/MyCss.css" rel="stylesheet" />
+    <link href="~/Content/W3Schools.css" rel="stylesheet" />
+    <link href="~/Content/animate.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/MyScripts.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="//fonts.googleapis.com/css?family=Sofia" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Prompt:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=latin-ext,thai,vietnamese" rel="stylesheet">
+
+    <title>Index</title>
+    <script>
+        jQuery(document).on('click', '.mega-dropdown', function (e) {
+            e.stopPropagation()
+        })
+    </script>
+    @RenderSection("LayoutUI",false)
+</head>
+<body>
+    <div class="container w3-animate-top">
+        <div style="border-bottom:1px solid #cecbcb" id="head-link">
+        
+            <a href="@Url.Action("Index", "Home")"><h1><i><b>JEWELERY</b></i></h1></a>
+        
+        </div>
+
+        <nav class="w3-margin-0 navbar w3-transparent w3-margin-bottom w3-border-bottom">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="@Url.Action("Index", "Home")" class="navbar-brand">Anasayfa</a>
+
+                    <button type="button" class="navbar-toggle w3-transparent" data-toggle="collapse" data-target="#myNavBar">
+                        <span class="w3-black icon-bar"></span>
+                        <span class="w3-black icon-bar"></span>
+                        <span class="w3-black icon-bar"></span>
+                    </button>
+
+                </div>
+
+                @{
+                    CustomerDTO customer = (CustomerDTO)Session["Customer"];
+                    short _quantity = 0;
+
+                    if (Session["Products"] != null)
+                    {
+                        List<ShoppingCartDTO> pList = (List<ShoppingCartDTO>)Session["Products"];
+
+                        _quantity = (short)pList.Count();
+                        
+                      
+                    }
+
+                }
+
+                @*Mega Menu Start*@
+                <div class="collapse navbar-collapse js-navbar-collaps" id="myNavBar">
+
+                    @Html.Action("PartialCategories", "Home")
+
+                    @* Search *@
+                    @using (Ajax.BeginForm("Searchleer", "Product", FormMethod.Post, new AjaxOptions { OnSuccess = "result" }, new { @class = "navbar-form navbar-left", id = "subform" }))
+                    {
+                        <div id="searchdiv" class="input-group">
+                            <input  id="searchinput" type="search"autocomplete="off" onkeyup="myfunction()" name="q" class="form-control" placeholder="Ara..." />
+                            <div class="input-group-btn">
+                                <button id="search" class="btn btn-default" type="submit">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                            <ul id="goster" class="dropdown-menu" style="width:100%;">
+                                
+                            </ul>
+                        </div>
+                    }
+
+
+
+                    <ul class="nav navbar-nav navbar-right w3-margin-right">
+                        @{
+                           
+                            if (customer == null)
+                            {
+
+                                <li><a style="float:left" href="@Url.Action("Index","Shopping")"><span class="glyphicon glyphicon-shopping-cart"></span></a><span style="margin-top:14px;margin-left:-18px" id="sayi" class="w3-text-black w3-white badge">@_quantity</span></li>
+                                <li><a id="giris" style="width:auto;" href="#" data-toggle="modal" data-target="#loginModal"><span class="glyphicon glyphicon-log-in"></span> Giriş Yap</a></li>
+                                <li><a href="@Url.Action("Index","Login")"><span class="glyphicon glyphicon-user"></span> Üye Ol</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@Url.Action("Index","Shopping")"><span class="glyphicon glyphicon-shopping-cart"></span><span id="sayi" class="badge w3-blue">@_quantity</span></a></li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" id="girisi" href="#" data-toggle="dropdown">
+                                        @customer.Name @customer.LastName
+                                    </a>
+                                    <ul class="dropdown-menu animated rubberBand">
+                                        <li class="nav">
+                                            <a href="@Url.Action("Index","Customer",new { id=customer.CustomerID })">Profilim</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="@Url.Action("LogOut","Login")"><span class="glyphicon glyphicon-user"></span> Çıkış Yap</a></li>
+                            }
+                        }
+
+                    </ul>
+                </div>
+                @*Mega Menu END*@
+
+            </div>
+        </nav>
+    </div>
+    @*<div class="clearfix"></div>*@
+
+    <div class="w3-animate-opacity">
+        @RenderBody()
+
+    </div>
+  
+    @* <---- FOOTER -----> *@
+    <div id="ft" class="w3-animate-bottom">
+        <div class="container">
+            <div class="row w3-margin">
+
+                <div class="pull-left col-md-4 col-lg-4">
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 text-center">
+                        <div class="icon-circle">
+                            <a href="#" class="ifacebook" title="Facebook"><i class="fa fa-facebook"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 text-center">
+                        <div class="icon-circle">
+                            <a href="#" class="itwittter" title="Twitter"><i class="fa fa-twitter"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 text-center">
+                        <div class="icon-circle">
+                            <a href="#" class="igoogle" title="Google+"><i class="fa fa-google-plus"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3 text-center">
+                        <div class="icon-circle">
+                            <a href="#" class="iLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <form>
+                    <div class="col-md-6 col-lg-6">
+                        <div class="pull-left input-group">
+                            <input class="form-control" type="text" placeholder="E-Posta Adresiniz" />
+                        </div>
+                        <div class="input-group-btn">
+                            <button class="btn w3-black">KAYIT OL</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row w3-topbar ">
+                <div class="pull-right col-md-8 col-lg-8">
+
+                    <dl class="footer-menu">
+                        <dt>KURUMSAL</dt>
+                        <dd>HAKKIMIZDA</dd>
+                        <dd>KAMPANYALAR</dd>
+                        <dd>MAĞAZALAR</dd>
+                        <dd>İNSAN KAYNAKLARI</dd>
+                        <dd>BASIN ODASI</dd>
+                    </dl>
+                    <dl class="footer-menu">
+                        <dt>E-SATIŞ DESTEK</dt>
+                        <dd>ÜCRETSİZ GÖNDERİM</dd>
+                        <dd>ÜCRETSİZ İADE DEĞİŞİM GARANTİSİ</dd>
+                        <dd>ÖDEME VE TAKSİK SEÇENEKLERİ</dd>
+                        <dd>%100 GÜVENLİ ALIŞVERİŞ</dd>
+                    </dl>
+                    <dl class="footer-menu">
+                        <dt>MÜŞTERİ İLİŞKİLERİ</dt>
+                        <dd>MÜCEVHER HAKKINDA</dd>
+                        <dd>TESLİMAT HAKKINDA</dd>
+                        <dd>SIK SORULAN SORULAR</dd>
+                        <dd>GİZLİLİK VE GÜVENLİK POLİTİKAMIZ</dd>
+                        <dd>BİZE ULAŞIN</dd>
+                    </dl>
+                </div>
+            </div> @*FOOTER MENU*@
+        </div>@*FOOTER İCONS*@
+
+    </div> @*FOOTER*@
+
+</body>
+</html>
+
+@*MODAL START*@
+<div style="height:100%;width:100%;overflow:auto;position:fixed;" id="loginModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div style="background-color:#fefefe; margin: 5% auto 15% auto; border: 1px solid #888; width: 80%;" class="modal-content">
+
+            <div class="modal-header w3-blue">
+
+                <button style="position: absolute;right: 25px;top: 0;color: #000;font-size: 35px;font-weight: bold;cursor:pointer" type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Giriş Yap</h4>
+            </div>
+            <div class="modal-body modal-sm">
+                @using (Html.BeginForm("SignIn", "Login"))
+                {
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="username" type="text" class="form-control" name="email" placeholder="Email Adresiniz...">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input id="password" type="password" class="form-control" name="password" placeholder="Şifreniz...">
+                    </div>
+                    <input type="submit" value="Giriş Yap" class="btn btn-success form-control" />
+
+                }
+
+            </div>
+            <div class="modal-footer">
+                <span class="psw"><a href="#">Şifremi Unuttum?</a></span>
+                <p>Henüz üye olmadınız mı? <a href="#">Buraya</a> tıklayarak üye olabilirsiniz.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*MODAL END*@
+

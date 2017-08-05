@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Sablon.cshtml";
+}
+
+<div class="container">
+    <div class="row w3-margin w3-bottombar">
+        <div class="w3-margin-top w3-topbar"> </div>
+            <div class="panel-group col-md-3 col-lg-3 w3-margin-top">
+                @*Profil Sayfası *@
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Profil Bilgi İşlemleri</div>
+
+                    @{
+                        CustomerDTO ct = Session["Customer"] as CustomerDTO;
+                    }
+
+                    <div class="panel-body">
+                        <ul class="nav">
+                            
+
+                                @using (Ajax.BeginForm("CustProfile", "Customer", new AjaxOptions { OnSuccess = "info" }))
+                                {
+                                    <li>
+                                        <input type="hidden" name="CustomerID" value="@ct.CustomerID" />
+                                        <button name="info" value="Info" class="w3-btn w3-transparent w3-text-black w3-hover-none w3-hover-text-indigo" type="submit">Üyelik Bilgilerim</button>
+                                    </li>
+                                    <li>
+                                        <button name="info" value="Pass" class="w3-btn w3-transparent w3-text-black w3-hover-none w3-hover-text-indigo" type="submit">Şifremi Değiştir</button>
+                                    </li>
+                                    <li>
+                                        <button name="info" value="Order" class="w3-btn w3-transparent w3-text-black w3-hover-none w3-hover-text-indigo" type="submit">Siparişlerim</button>
+                                    </li>
+
+                                    <li>
+                                        <button name="info" value="Adres" class="w3-btn w3-transparent w3-text-black w3-hover-none w3-hover-text-indigo" type="submit">Adres Bilgilerim</button>
+                                    </li>
+                                    <li>
+                                        <button name="info" value="Favourite" class="w3-btn w3-transparent w3-text-black w3-hover-none w3-hover-text-indigo" type="submit">Favori Ürünlerim</button>
+                                    </li>
+
+                                }
+                            @using (Ajax.BeginForm("Index2", "Shopping", new AjaxOptions { OnSuccess = "info" }))
+                            {
+                                <li>
+                                    <button name="info" value="ShoppingCart" class="w3-btn w3-transparent w3-text-black w3-hover-none w3-hover-text-indigo" type="submit">Alışveriş Sepetim</button>
+                                </li>
+                            }
+
+                        </ul>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            @*---------------------------------------------------*@
+
+        <div id="partial" class="col-md-9 col-sm-9 col-lg-9">
+
+        </div>
+
+  
+    </div>
+</div>
+

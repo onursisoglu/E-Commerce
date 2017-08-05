@@ -1,0 +1,14 @@
+c:\users\onur\documents\visual studio 2015\Projects\Jewelery_Project\Jewelery.BLL\bin\Debug\Jewelery.BLL.dll
+c:\users\onur\documents\visual studio 2015\Projects\Jewelery_Project\Jewelery.BLL\bin\Debug\Jewelery.BLL.pdb
+c:\users\onur\documents\visual studio 2015\Projects\Jewelery_Project\Jewelery.BLL\obj\Debug\Jewelery.BLL.csprojResolveAssemblyReference.cache
+c:\users\onur\documents\visual studio 2015\Projects\Jewelery_Project\Jewelery.BLL\obj\Debug\Jewelery.BLL.dll
+c:\users\onur\documents\visual studio 2015\Projects\Jewelery_Project\Jewelery.BLL\obj\Debug\Jewelery.BLL.pdb
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.BLL\bin\Debug\Jewelery.BLL.dll.config
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.BLL\bin\Debug\EntityFramework.dll
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.BLL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.BLL\bin\Debug\Jewelery.DAL.dll
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.BLL\bin\Debug\Jewelery.DAL.pdb
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.BLL\bin\Debug\EntityFramework.xml
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.BLL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.BLL\bin\Debug\Jewelry.DTO.dll
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelery.BLL\bin\Debug\Jewelry.DTO.pdb

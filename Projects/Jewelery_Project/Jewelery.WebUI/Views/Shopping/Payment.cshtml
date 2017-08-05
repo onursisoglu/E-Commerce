@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Sablon.cshtml";
+}
+@model CustomerDTO
+@using (Html.BeginForm("Payment", "Shopping")) { 
+<div class="container">
+    <div class="row">
+        <h2>Ödeme Bilgileri</h2>
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-heading"><label>Adres Bilgileriniz</label></div>
+            </div>
+
+            
+            @foreach (var item in Model.AddressesDTO)
+            { <div class="panel panel-default">
+            <input name="adresID" id="adresID"style="float:left;margin-left:5px;"type="radio"value="@item.AddressID"/>
+                  <div class="w3-margin-top w3-margin-left"><p>@Model.Name @Model.LastName</p></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="pull-left col-md-6 col-lg-6"><p> @item.Address1 @item.District / @item.City</p></div>
+                        <div class="pull-right">
+                            <div class="w3-margin-right">
+                                <p>@Model.Phone</p>
+                            </div>
+                            <div>@Model.Email</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+
+
+        </div>
+
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Kart Bilgileri</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <span>Kart Sahibi</span>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <span>Kart Numarası</span>
+                        <input type="number" class="form-control" />
+                    </div>
+                    <div class="form-group pull-left" style="padding-right:20px;">
+                        <span>CVV</span>
+                        <input style="width:150px;" maxlength="3" type="number" class="form-control" />
+                    </div>
+                    <div class="form-group pull-left" style="padding-right:20px;">
+
+                        <span>Ay</span>
+                        <select class="form-control">
+                            @for (int i = 1; i < 13; i++)
+                            {
+                                <option value="value">@i</option>
+                            }
+
+                        </select>
+                    </div>
+                    <div class="form-group pull-left">
+                        <span>Yıl</span>
+                        <select class="form-control">
+                            @for (int i = DateTime.Now.Year; i < DateTime.Now.Year + 10; i++)
+                            {
+                                <option value="value">@i.ToString().Substring(2, 2)</option>
+                            }
+                        </select>
+                    </div>
+
+
+                    <input type="hidden" name="tutar" />
+                    <input type="hidden" name="OdemeTipi" />
+
+
+                    <div class="form-group">
+                        <input type="submit" class="form-control btn btn-primary" value="Ödeme Yap" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+}

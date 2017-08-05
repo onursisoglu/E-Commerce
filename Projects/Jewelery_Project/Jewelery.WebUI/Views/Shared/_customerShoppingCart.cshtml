@@ -1,0 +1,77 @@
+﻿@model List<ShoppingCartDTO>
+<style>
+    .w3-animate-bottom tr td input {
+        width: 50% !important;
+        text-align: center;
+    }
+
+    .w3-animate-bottom tr td {
+        vertical-align: baseline !important;
+        width: 10%;
+    }
+
+        .w3-animate-bottom tr td img {
+            height: 100px;
+        }
+
+    #productN {
+        width: 18% !important;
+    }
+</style>
+@if (Model==null||Model.Count==0)
+{
+    <div class="w3-margin text-center alert alert-danger">Sepetinizde Ürün Bulunmamaktadır... </div>
+}
+else
+{
+    <div class="w3-margin text-center" id="tabdiv">
+        
+        <table class="table w3-animate-bottom">
+            <tr>
+                <th id="productN">ÜRÜN ADI</th>
+                <th>ADET FİYATI</th>
+                <th>ADET</th>
+                <th>TOPLAM FİYAT</th>
+                <th>İŞLEM</th>
+            </tr>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr id="tr-@item.ProductID">
+                        <td><img src="@item.ProductPhoto" /><span>@item.ProductName</span></td>
+                        <td><span>@item.UnitPrice.ToString("C")</span></td>
+
+                        <td>
+                            @using (Ajax.BeginForm("AdetGuncelleme", "Shopping", new AjaxOptions { OnSuccess = "yeniAdet" }, new {id = "form" + item.ProductID }))
+                            {
+                                <input style="width:75%!important" id="txtAdet" name="txtAdet" onchange="Guncelle(@item.ProductID)" onkeyup="Guncelle(@item.ProductID)" class="form-control" type="number" min="1" value="@item.Quantity" />
+                                <input type="hidden" name="ProductID" value="@item.ProductID" />
+                            }
+                        </td>
+
+
+
+                        <td><span id="total-@item.ProductID">@item.TotalPrice.ToString("C")</span></td>
+                        <td>
+                            @using (Ajax.BeginForm("DeleteBag", "Shopping", new AjaxOptions { OnSuccess = "DeleteProduct" }))
+                            {
+                                <button type="submit" class="btn btn-danger" name="ProductID" value="@item.ProductID" onclick="RemoveTr(@item.ProductID)">Sepetten Çıkar</button>
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div><hr />
+    <div id="shoppingComplete" class="col-md-4">
+        <div class="checkout-total">
+           
+            <h3>Sepete Toplam Fiyatı<hr /> <h3 id="toplam">@Model.Sum(x => x.TotalPrice).ToString("C").Replace("₺", "TL")</h3> </h3>
+            @using (Html.BeginForm("Payment", "Shopping",FormMethod.Get)) { 
+            <button class="w3-btn w3-deep-orange">Alışverişi Tamamla</button>}
+        </div>
+    </div>
+}
+
+

@@ -1,0 +1,9 @@
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelry.DTO\bin\Debug\Jewelry.DTO.dll
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelry.DTO\bin\Debug\Jewelry.DTO.pdb
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelry.DTO\obj\Debug\Jewelry.DTO.csprojResolveAssemblyReference.cache
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelry.DTO\obj\Debug\Jewelry.DTO.dll
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelry.DTO\obj\Debug\Jewelry.DTO.pdb
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelry.DTO\bin\Debug\Jewelery.DAL.dll
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelry.DTO\bin\Debug\EntityFramework.dll
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelry.DTO\bin\Debug\Jewelery.DAL.pdb
+C:\Users\Onur\Documents\Visual Studio 2015\Projects\Jewelery_Project\Jewelry.DTO\bin\Debug\EntityFramework.xml

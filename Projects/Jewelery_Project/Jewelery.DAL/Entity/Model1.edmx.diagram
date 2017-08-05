@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="629ea942fcc74031929f9e3247eae465" Name="Diagram1" ZoomLevel="66">
+        <EntityTypeShape EntityType="JewelryModel.Category" Width="1.5" PointX="0.75" PointY="8" />
+        <EntityTypeShape EntityType="JewelryModel.Comment" Width="1.5" PointX="10.5" PointY="5" />
+        <EntityTypeShape EntityType="JewelryModel.Customer" Width="1.5" PointX="8.375" PointY="2.375" />
+        <EntityTypeShape EntityType="JewelryModel.FavoriteProduct" Width="1.5" PointX="10.5" PointY="8.375" />
+        <EntityTypeShape EntityType="JewelryModel.Mine" Width="1.5" PointX="0.75" PointY="11.875" />
+        <EntityTypeShape EntityType="JewelryModel.OrderDetail" Width="1.5" PointX="7.375" PointY="7.75" />
+        <EntityTypeShape EntityType="JewelryModel.ProductPicture" Width="1.5" PointX="7.5" PointY="18" />
+        <EntityTypeShape EntityType="JewelryModel.Product" Width="1.5" PointX="5.25" PointY="7" />
+        <EntityTypeShape EntityType="JewelryModel.sysdiagram" Width="1.5" PointX="9.75" PointY="11.375" />
+        <AssociationConnector Association="JewelryModel.FK_Comment_Customer" />
+        <AssociationConnector Association="JewelryModel.FK_Comment_Products" />
+        <AssociationConnector Association="JewelryModel.FK_FavoriteProduct_Customer" />
+        <AssociationConnector Association="JewelryModel.FK_FavoriteProduct_Products" />
+        <AssociationConnector Association="JewelryModel.FK_OrderDeatils_Products" />
+        <AssociationConnector Association="JewelryModel.FK_ProductPictures_Products1" />
+        <EntityTypeShape EntityType="JewelryModel.Address" Width="1.5" PointX="10.625" PointY="0.875" />
+        <EntityTypeShape EntityType="JewelryModel.Order" Width="1.5" PointX="12.875" PointY="2.125" />
+        <AssociationConnector Association="JewelryModel.FK_Address_Customer" />
+        <AssociationConnector Association="JewelryModel.FK_Order_Address" />
+        <AssociationConnector Association="JewelryModel.FK_Order_Customer1" />
+        <AssociationConnector Association="JewelryModel.FK_OrderDeatils_Order" />
+        <EntityTypeShape EntityType="JewelryModel.SubCategory" Width="1.5" PointX="3" PointY="8" />
+        <AssociationConnector Association="JewelryModel.FK_CategoryOzellik_Categories" />
+        <AssociationConnector Association="JewelryModel.FK_SubCategory_Mine" />
+        <AssociationConnector Association="JewelryModel.FK_Products_CategorySpecification" />
+        <EntityTypeShape EntityType="JewelryModel.Gem" Width="1.5" PointX="0.75" PointY="3.875" />
+        <AssociationConnector Association="JewelryModel.FK_CategoryOzellik_Gem" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,180 @@
+﻿
+@model CustomerInfoViewModel
+
+<div class="row">
+    <div class="btn-block">
+        <button class="btn btn btn-default w3-circle"data-toggle="modal"data-target="#adresEkle">Yeni Adres Ekle</button>
+    </div>
+</div>
+<div class="row w3-margin-top">
+    @foreach (var item in Model.Adres)
+    {
+
+            <div id="@item.AddressID" class="panel panel-default">
+                <button onclick="MoveData(@item.AddressID)" id="btn-@item.AddressID" value="@item.AddressID" class="btn btn-default pull-right w3-deep-orange w3-hover-white" type="button" data-toggle="modal" data-il="@item.City" data-ilce="@item.District" data-ulke="@item.Country" data-adres="@item.Address1" data-adresId="@item.AddressID" data-target="#adresModal"><i class="fa fa-edit"></i></button>
+                @using (Ajax.BeginForm("AddressDelete", "Customer", new AjaxOptions { OnSuccess = "adresResult" }))
+                {
+                    <button type="submit" value="@item.AddressID" name="AddressID" onclick="AddressDel(@item.AddressID)" class="btn btn-default pull-right w3-deep-orange w3-hover-text-white"><i class="fa fa-trash-o"> Sil</i></button>
+                }
+                
+                <div class="panel-heading"><label>Adres Bilgileriniz</label></div>
+                <div class="panel-body">
+                    <div class="w3-block"><p>@Model.Customer.Name</p></div>
+                    <div class="row">
+                        <div class="pull-left col-md-6 col-lg-6"><p> @item.Address1 @item.District / @item.City</p></div>
+                        <div class="pull-right">
+                            <div class="w3-margin-right">
+                                <p>@Model.Customer.Phone</p>
+                            </div>
+                            <div>@Model.Customer.Email</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    }
+    @using (Html.BeginForm("AddressPost", "Customer",FormMethod.Post))
+    {
+            <!-- Modal -->          <!-- Modal -->
+        <div class="modal fade" id="adresModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <label class="col-md-5 col-lg-5 control-label">
+                                    <span class="w3-text-red">*</span>
+                                    İl
+                                </label>
+                                <div class="col-md-6 col-lg-6">
+
+                                    <input class="form-control" id="City" name="City" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <label class="col-md-5 col-lg-5 control-label">
+                                    <span class="w3-text-red">*</span>
+                                    İlçe
+                                </label>
+                                <div class="col-md-6 col-lg-6">
+                                    <input class="form-control" id="District" name="District" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <label class="col-md-5 col-lg-5 control-label">
+                                    <span class="w3-text-red">*</span>
+                                    Ülke
+                                </label>
+                                <div class="col-md-6 col-lg-6">
+                                    <input class="form-control" id="Country" name="Country" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+
+                                <label class="col-md-5 col-lg-5 control-label">
+                                    <span class="w3-text-red">*</span>
+                                    Açık Adres
+                                </label>
+                                <div class="col-md-6 col-lg-6">
+                                    <textarea id="Address1" name="Address1" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <input type="hidden" value="" id="hd" name="AddressID" />
+                        <button type="submit" class="btn btn-default w3-deep-orange w3-hover-white">KAYDET</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+    <!-- Modal -->          <!-- Modal -->
+    
+
+</div>
+@using (Html.BeginForm("NewAddress", "Customer", FormMethod.Post))
+{
+            <!-- Modal -->          <!-- Modal -->
+    <div class="modal fade" id="adresEkle" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-5 col-lg-5 control-label">
+                                <span class="w3-text-red">*</span>
+                                İl
+                            </label>
+                            <div class="col-md-6 col-lg-6">
+
+                                <input class="form-control" name="City"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-5 col-lg-5 control-label">
+                                <span class="w3-text-red">*</span>
+                                İlçe
+                            </label>
+                            <div class="col-md-6 col-lg-6">
+                                <input class="form-control" name="District"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-5 col-lg-5 control-label">
+                                <span class="w3-text-red">*</span>
+                                Ülke
+                            </label>
+                            <div class="col-md-6 col-lg-6">
+                                <input class="form-control" name="Country"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+
+                            <label class="col-md-5 col-lg-5 control-label">
+                                <span class="w3-text-red">*</span>
+                                Açık Adres
+                            </label>
+                            <div class="col-md-6 col-lg-6">
+                                <textarea name="Address1" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @{ 
+                        CustomerDTO ct = Session["Customer"] as CustomerDTO;
+                    }
+                    <input type="hidden" value="@ct.CustomerID" name="CustomerID" />
+                    <button type="submit" class="btn btn-default w3-deep-orange w3-hover-white">KAYDET</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}

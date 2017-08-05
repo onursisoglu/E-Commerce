@@ -1,0 +1,49 @@
+﻿@model CustomerDTO
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Sablon.cshtml";
+}
+
+<div class="container w3-topbar">
+    <div class="row">
+
+        <div class="form-group form-horizontal col-md-4 col-lg-4">
+            <div style="border-bottom:1px solid gray"><h1><i>ÜYE OL</i></h1></div>
+            
+                @using (Html.BeginForm("Index","Login",FormMethod.Post,new { @class= "w3-margin-top" }))
+                {
+
+                    @Html.LabelFor(c=>c.Name)
+                    @Html.TextBoxFor(c => c.Name, new {@class="form-control"})
+                    @Html.ValidationMessageFor(c => c.Name,null,new { @class = "w3-text-red" })<br />
+               
+                    @Html.LabelFor(c => c.LastName) 
+                    @Html.TextBoxFor(c => c.LastName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(c => c.LastName, null, new { @class = "w3-text-red" })<br />
+
+
+                    @Html.LabelFor(c => c.Email)
+                    @Html.TextBoxFor(c => c.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(c => c.Email, null, new { @class = "w3-text-red" })<br />
+
+                    @Html.LabelFor(c => c.Password)
+                    @Html.PasswordFor(c => c.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(c => c.Password, null, new { @class = "w3-text-red" })<br />
+
+                    @Html.LabelFor(c=>c.ComparePassword)
+                    @Html.PasswordFor(c => c.ComparePassword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(c => c.ComparePassword, null, new { @class = "w3-text-red" })<br />
+
+                    <button class="btn btn-primary btn-group-justified w3-margin-top" type="submit">Kayıt Ol</button>
+
+                    @ViewData["sameEmailError"]
+                }
+        </div>
+        <div class="w3-margin-top col-md-8 col-lg-8">
+            <div><img src="http://i.hizliresim.com/nRQAP0.jpg" /></div>
+        </div>
+    </div>
+
+</div>
+
+

@@ -1,0 +1,199 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Mosaddek">
+    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>Jewelery -@ViewBag.Title</title>
+    <link href="~/Areas/Admin/Content/AdminPaneli/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Areas/Admin/Content/AdminPaneli/css/bootstrap-reset.css" rel="stylesheet">
+    <link href="~/Content/W3Schools.css" rel="stylesheet" />
+
+    <link href="~/Areas/Admin/Content/AdminPaneli/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <link href="~/Areas/Admin/Content/AdminPaneli/css/style.css" rel="stylesheet">
+    <link href="~/Areas/Admin/Content/AdminPaneli/css/style-responsive.css" rel="stylesheet" />
+
+    @RenderSection("head", false)
+</head>
+
+<body>
+    @{
+        CustomerDTO ct = Session["Admin"] as CustomerDTO;
+    }
+    <section id="container">
+        <!--header start-->
+        <header class="header white-bg">
+            <div class="sidebar-toggle-box">
+                <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
+            </div>
+            <!--logo start-->
+            <a href="index.html" class="logo">Jewelery<span> Admin</span></a>
+            <!--logo end-->
+            <div class="top-nav ">
+                <!--search & user info start-->
+                <ul class="nav pull-right top-menu">
+                    <li>
+                        <a class="w3-deep-orange" href="/Home/Index">Siteye Git</a>
+                    </li>
+                    <!-- user login dropdown start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <img alt="" src="https://scontent.fsaw1-8.fna.fbcdn.net/v/t1.0-1/c0.112.305.305/s24x24/10458459_10152630355327421_7499565217590743024_n.jpg?oh=2d466ad79f38a537ff3a397eda48e002&oe=59AA1CAD">
+                            <span class="username">@ct.Name @ct.LastName</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <div class="log-arrow-up"></div>
+                            <li><a href="@Url.Action("LogOut","AdminLogin")"><i class="icon-key"></i> Log Out</a></li>
+                        </ul>
+                    </li>
+                    <!-- user login dropdown end -->
+                </ul>
+                <!--search & user info end-->
+            </div>
+        </header>
+        <!--header end-->
+        <!--sidebar start-->
+
+
+
+
+        <div id="sidebar" class="nav-collapse  ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu" id="nav-accordion">
+                @using (Ajax.BeginForm("DataList", "AdminHome", new AjaxOptions { OnSuccess = "PartialData" }))
+                {
+                    <li>
+                        <button style="width:100%;text-align:left" name="text" value="Info" class="w3-btn w3-transparent" type="submit">
+                            <i class="icon-dashboard"></i>
+                            <span>Anasayfa</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button style="width:100%;text-align:left" name="text" value="Product" class="w3-btn w3-transparent" type="submit">
+                            <i class="icon-dashboard"></i>
+                            <span>Ürünler</span>
+                        </button>
+                    </li>
+                            <li>
+                                <button style="width:100%;text-align:left" name="text" value="Category" class="w3-btn w3-transparent" type="submit">
+                                    <i class="icon-dashboard"></i>
+                                    <span>Kategoriler</span>
+                                </button>
+                            </li>
+                                <li>
+                                    <button style="width:100%;text-align:left" name="text" value="Customer" class="w3-btn w3-transparent" type="submit">
+                                        <i class="icon-dashboard"></i>
+                                        <span>Kullanıcılar</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button style="width:100%;text-align:left" name="text" value="Gem" class="w3-btn w3-transparent" type="submit">
+                                        <i class="icon-dashboard"></i>
+                                        <span>Kategori Tip</span>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button style="width:100%;text-align:left" name="text" value="SubCategory" class="w3-btn w3-transparent" type="submit">
+                                        <i class="icon-dashboard"></i>
+                                        <span>Alt Kategori</span>
+                                    </button>
+                                </li>
+
+                                <li class="sub-menu">
+                                    <button style="width:100%;text-align:left" name="text" value="Order" class="w3-btn w3-transparent" type="submit">
+                                        <i class="icon-laptop"></i>
+                                        <span>Alışverişler</span>
+                                    </button>
+                                    <ul class="sub">
+                                        <li><a href="boxed_page.html">Tamamlanan Siparişler</a></li>
+                                        <li><a href="horizontal_menu.html">Onay Bekleyen Siparişler</a></li>
+
+                                    </ul>
+                                </li>
+                               <li class="sub-menu">
+                                    <a href="">
+                                        <i class="icon-book"></i>
+                                        <span>Satış Raporları</span>
+                                    </a>
+                                    <ul class="sub">
+                                        <li>
+                                            <button style="width:100%;text-align:left;margin-left:-15px" name="text" value="CategoryChart" class="w3-btn w3-transparent" type="submit">
+                                                <i class="icon-dashboard"></i>
+                                                <span>Kategoriye Göre Satışlar</span>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </li>
+                }
+
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+
+        <!--sidebar end-->
+        <!--main content start--><br />
+        <br />
+        <section style="margin-top:50px" class="col-lg-offset-2" id="main-content">
+            @RenderBody()
+        </section>
+
+        <!--main content end-->
+        <!--footer start-->
+        <footer class="site-footer">
+            <div class="text-center">
+                2017 &copy; Jewelery  by Onur Şişoğlu
+                <a href="#" class="go-top">
+                    <i class="icon-angle-up"></i>
+                </a>
+            </div>
+        </footer>
+        <!--footer end-->
+    </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="~/Areas/Admin/Content/AdminPaneli/js/jquery.js"></script>
+    <script src="~/Areas/Admin/Content/AdminPaneli/js/bootstrap.min.js"></script>
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script class="include" type="text/javascript" src="~/Areas/Admin/Content/AdminPaneli/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="~/Areas/Admin/Content/AdminPaneli/js/jquery.scrollTo.min.js"></script>
+
+    <script src="~/Areas/Admin/Content/AdminPaneli/js/common-scripts.js"></script>
+
+    <script type="text/javascript" src="http://www.chartjs.org/assets/Chart.js">
+    </script>
+
+    <script>
+        function PartialData(data) {
+            debugger
+            $("#main-content").html(data);
+        };
+        function Remove(ID) {
+            debugger
+            $("#tr-" + ID).fadeOut();
+        };
+        function result(data) {
+            var d = data;
+            if (d == true) {
+                $("#bilgi").addClass("alert alert-success");
+                $("#bilgi").html("İşlem Başarılı");
+            } else {
+                $("#bilgi").addClass("alert alert-danger");
+                $("#bilgi").html("İşlem Başarısız");
+            }
+        };
+    </script>
+
+</body>
+</html>

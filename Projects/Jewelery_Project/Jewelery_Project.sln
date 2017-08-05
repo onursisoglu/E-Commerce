@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jewelery.BLL", "Jewelery.BLL\Jewelery.BLL.csproj", "{601DB755-8AEA-45ED-BB1D-C7388071624F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jewelery.DAL", "Jewelery.DAL\Jewelery.DAL.csproj", "{6C93C085-A1AA-4F8F-88F7-85E243E58224}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jewelery.WebUI", "Jewelery.WebUI\Jewelery.WebUI.csproj", "{766E00C7-FDCF-48D6-91CF-85890E6EBCAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jewelry.DTO", "Jewelry.DTO\Jewelry.DTO.csproj", "{6C53070D-6798-49F7-9902-4B99AA0E43A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jewelery.WebApi", "Jewelery.WebApi\Jewelery.WebApi.csproj", "{4F7BB44D-9301-40EF-ABCF-35B38CE39596}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{601DB755-8AEA-45ED-BB1D-C7388071624F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{601DB755-8AEA-45ED-BB1D-C7388071624F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{601DB755-8AEA-45ED-BB1D-C7388071624F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{601DB755-8AEA-45ED-BB1D-C7388071624F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C93C085-A1AA-4F8F-88F7-85E243E58224}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C93C085-A1AA-4F8F-88F7-85E243E58224}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C93C085-A1AA-4F8F-88F7-85E243E58224}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C93C085-A1AA-4F8F-88F7-85E243E58224}.Release|Any CPU.Build.0 = Release|Any CPU
+		{766E00C7-FDCF-48D6-91CF-85890E6EBCAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{766E00C7-FDCF-48D6-91CF-85890E6EBCAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{766E00C7-FDCF-48D6-91CF-85890E6EBCAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{766E00C7-FDCF-48D6-91CF-85890E6EBCAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C53070D-6798-49F7-9902-4B99AA0E43A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C53070D-6798-49F7-9902-4B99AA0E43A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C53070D-6798-49F7-9902-4B99AA0E43A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C53070D-6798-49F7-9902-4B99AA0E43A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F7BB44D-9301-40EF-ABCF-35B38CE39596}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F7BB44D-9301-40EF-ABCF-35B38CE39596}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F7BB44D-9301-40EF-ABCF-35B38CE39596}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F7BB44D-9301-40EF-ABCF-35B38CE39596}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

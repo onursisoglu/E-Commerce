@@ -1,0 +1,74 @@
+﻿@model AdminViewModel
+
+<section class="panel">
+    <header class="panel-heading label-success">
+       Kategori Tipleri
+    </header>
+    <div class="panel-body">
+        <div class="adv-table editable-table ">
+            <br />
+            
+            <div class="clearfix">
+                <div class="btn-group">
+                    @using (Ajax.BeginForm("GemAdd", "AdminHome", new AjaxOptions { OnSuccess = "PartialData", HttpMethod = "Get" }))
+                    {
+                        <button type="submit" class="w3-button w3-round-large w3-deep-orange ">
+                            Yeni Tip <i class="icon-plus"></i>
+                        </button>
+                    }
+
+                </div>
+            </div>
+            <br />
+            <div class="space15"></div>
+            <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                <thead>
+                    <tr>
+                        <th>Tip ID</th>
+                        <th>Tip Adı</th>
+                        <th>Tip Renk</th>
+                        <th>Tip Şekli</th>
+                        <th>Tip Ağırlığı</th>
+                        <th>Eklenme Tarihi</th>
+                        <th>Güncellenme Tarihi</th>
+                        <th>Durum</th>
+                        <th>Güncelle</th>
+                        <th>Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var gem in Model.GemList)
+                    {
+                        <tr class="">
+                            <td>@gem.GemID</td>
+                            <td>@gem.GemName</td>
+                            <td>@gem.Colour</td>
+                            <td>@gem.Shape</td>
+                            <td>@gem.GemWeight</td>
+                            <td>@gem.AddedDate</td>
+                            <td>@gem.UpdateDate</td>
+                            <td>@gem.IsActive</td>
+                            <td>
+                            @using (Ajax.BeginForm("GemUpdate", "AdminHome", new AjaxOptions { OnSuccess = "PartialData", HttpMethod = "Get" }))
+                            {
+                                <button name="GemID" value="@gem.GemID" type="submit" class="w3-button w3-round-large w3-light-blue w3-hover-deep-orange ">
+                                    <i class="icon-pencil"></i>
+                                </button>
+                            }
+                            </td>
+                            <td>
+                                @using(Ajax.BeginForm("GemDelete","AdminHome",new AjaxOptions { OnSuccess = "Delete" })) {
+                                <button name="GemID" value="@gem.GemID" type="submit" class="w3-button w3-round-large w3-button w3-round-large w3-deep-orange w3-hover-red ">
+                                    <i class="icon-trash"></i>
+                                </button>}
+                            </td>
+                        </tr>
+                    }
+                    GemDelete
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+

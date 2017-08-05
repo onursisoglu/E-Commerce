@@ -1,0 +1,113 @@
+﻿@*Home Page Random Product List*@
+
+@model  ProductsViewModel
+
+<div class="container">
+        <div class="w3-border-gray">
+            <div>
+                <h2 class="text-center" style="padding-top:50px;">En Çok Satan Ürünler</h2>
+                <div class="row w3-margin">
+                    @foreach (var item in Model.EnCokSatilanlar)
+                    {
+                        <div id="s" class="productdiv product w3-hover-shadow col-md-2 col-lg-2 w3-margin-right ">
+
+                            <div class="w3-display-container">
+
+
+
+                                @if (item.Discount != null)
+                                {
+                                    <div id="@item.ProductID" class="discount-tag">@item.Discount.ToString().Replace("0,", "%")</div>
+                                }
+
+                                <a href="#"><img src="@item.ProductPhoto"></a>
+                            </div>
+                            <div id="urunInfo">
+                                <a href="#"><strong>@item.ProductName</strong></a>
+                                <h6>@item.UnitPrice.Value.ToString("C")</h6>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+</div>
+
+<div class="container">
+    <div class="w3-border-gray">
+        <div>
+            <h2 class="text-center">En Son Satın Alınan Ürünler</h2>
+            @*<div class="row">
+                <div class="col-lg-3 col-md-3  col-xs-12 col-sm-3 text-center">
+
+
+                </div>*@
+
+            @*<div class="col-md-9 col-lg-9">*@
+            <div class="row w3-margin">
+                @foreach (var order in Model.EnSonSatinAlinanlar)
+                {
+                    <div id="s" class="productdiv product w3-hover-shadow col-md-2 col-lg-2 w3-margin-right ">
+
+                        <div class="w3-display-container">
+
+                            @if (order.Discount !=null)
+                            {
+                                <div id="@order.ProductID" class="discount-tag">@order.Discount.ToString().Replace("0,", "%")</div>
+                            }
+                         
+
+                            <a href="#"><img src="@order.ProductPhoto"></a>
+                        </div>
+                        <div id="urunInfo">
+                            <a href="#"><strong>@order.ProductName</strong></a>
+                            <h6>@order.UnitPrice.Value.ToString("C")</h6>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="w3-border-gray">
+        <div>
+            <h2 class="text-center">İndirimde Olan Ürünler</h2>
+            @*<div class="row">
+                <div class="col-lg-3 col-md-3  col-xs-12 col-sm-3 text-center">
+
+
+                </div>*@
+
+            @*<div class="col-md-9 col-lg-9">*@
+            <div class="row w3-margin">
+                @foreach (var item in Model.indirimdeOlanlar)
+                {
+                    <div id="s" class="productdiv product w3-hover-shadow col-md-2 col-lg-2 w3-margin-right ">
+
+                        <div class="w3-display-container">
+
+
+
+                            @if (item.Discount != null)
+                            {
+                                <div id="@item.ProductID" class="discount-tag">@item.Discount.ToString().Replace("0,", "%")</div>
+                            }
+
+                            <a href="#"><img src="@item.ProductPhoto"></a>
+                        </div>
+                        <div id="urunInfo">
+                            <a href="#"><strong>@item.ProductName</strong></a>
+                            <h6>@item.UnitPrice.Value.ToString("C")</h6>
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>

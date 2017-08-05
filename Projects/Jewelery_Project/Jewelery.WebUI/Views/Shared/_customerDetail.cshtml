@@ -1,0 +1,119 @@
+﻿@model CustomerInfoViewModel
+
+    <div style="background-color:rgba(229, 219, 219, 0.52)" class="row w3-margin-top">
+       
+            @using (Html.BeginForm("InfoPost", "Customer",FormMethod.Post,new { id = "formInfo" }))
+            {
+                <div><h3>BİLGİLERİM</h3></div>
+
+                <div class="col-md-4 col-lg-4">
+                    <strong>Adınız</strong>
+                    <input class="form-control" type="text" name="Name" value="@Model.Customer.Name" /><br />
+                    <strong>Soyadınız</strong>
+                    <input class="form-control" type="text" name="LastName" value="@Model.Customer.LastName" /><br />
+                    <strong>Telefonunuz</strong>
+                    <input class="form-control" type="text" name="Phone" value="@Model.Customer.Phone" /><br />
+                    <strong>E-mail Adresiniz</strong>
+                    <input class="form-control" type="email" name="Email" value="@Model.Customer.Email" /><br />
+                </div>
+                <div class="col-md-8 col-lg-8">
+                    <div class="row">
+                        <div class="col-md-2 col-lg-2 w3-block"><strong>Doğum Tarihiniz</strong> </div>
+                        <div class="col-md-3 col-lg-3 ">
+
+                            <select name="Day" class="form-control">
+                                @if (Model.Customer.BirthDate != null)
+                                {
+                                    
+                                        <option selected="@Model.Customer.BirthDate.Value.Day">@Model.Customer.BirthDate.Value.Day</option>
+                                    
+                                }
+                                else
+                                {
+                                        <option selected="selected">Gün</option>
+                                    for (byte i = 1; i <=31; i++)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                }
+                               
+                            </select>
+                            <span>Gün</span>
+                        </div>
+
+                        <div class="col-md-3 col-lg-3 ">
+
+                            <select name="Month" class="form-control">
+                                @if (Model.Customer.BirthDate != null)
+                                {
+                                    
+                                        <option selected="@Model.Customer.BirthDate.Value.Month">@Model.Customer.BirthDate.Value.Month</option>
+                                    
+                                }
+                                else
+                                {
+                                    <option selected="selected">Ay</option>
+                                    for (byte i = 1; i <= 12; i++)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                }
+                            </select>
+                            <span>Ay</span>
+                        </div>
+
+                        <div class="col-md-3 col-lg-3 ">
+
+                            <select name="Year" class="form-control">
+                                @if (Model.Customer.BirthDate != null)
+                                {
+                                    
+                                        <option selected="@Model.Customer.BirthDate.Value.Year">@Model.Customer.BirthDate.Value.Year</option>
+                                    
+                                }
+                                else
+                                {
+                                    <option selected="selected">Yıl</option>
+                                    for (byte i = 1; i <= 31; i++)
+                                    {
+                                        <option value="@i">@i</option>
+                                    }
+                                }
+                                @for (short i = (short)DateTime.Now.AddYears(-17).Year; i >= 1980; i--)
+                                {
+                                    if (Model.Customer.BirthDate != null&&Model.Customer.BirthDate.Value.Year == i)
+                                    {
+                                        <option selected="@Model.Customer.BirthDate.Value.Year">@Model.Customer.BirthDate.Value.Year</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@i">Yıl</option>
+                                    }
+                                }
+                            </select>
+                            <span>Yıl</span>
+                        </div>
+                    </div>
+                    <br />
+
+                </div>
+                <div class="clearfix"></div>
+                <br />
+                <input type="hidden"name="CustomerID"value="@Model.Customer.CustomerID"/>
+                <input id="changeSave" class="col-lg-offset-1 col-md-offset-1 w3-margin-bottom pull-left btn btn-md btn-success pull-right animated bounceIn" type="submit" value="Değişiklikleri Kaydet">
+            }
+    </div>
+@section LayoutUI{
+<script>
+    $(document).ready(function () {
+        debugger
+        $("#changeSave").hide(function () {
+            $("#formInfo").keypress(function () {
+                $("#changeSave").show();
+            });
+        });
+    });
+</script>
+}
+
+

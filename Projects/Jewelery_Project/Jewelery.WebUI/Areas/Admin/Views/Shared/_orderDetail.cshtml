@@ -1,0 +1,49 @@
+﻿
+@model  List<OrderDetailDTO>
+
+<section class="panel">
+    <header class="panel-heading label-success">
+        Ürünler
+    </header>
+    <div class="panel-body">
+        <div class="adv-table editable-table ">
+            <br />
+
+            <div class="space15">Kullanıcı Adı</div>
+            <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                <thead>
+                    <tr>
+                        <th>Sipariş ID</th>
+                        <th>Ürün Adı</th>
+                        <th>Adet</th>
+                        <th>Birim Fiyat</th>
+                        <th>Toplam Fiyat</th>
+                        <th>Eklenme Tarihi</th>
+                        <th>Durumu</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                        @foreach (var detail in Model)
+                        {
+                            <tr class="">
+                                <td>@detail.OrderID</td>
+                                <td>@detail.ProductName</td>
+                                <td>@detail.Quantity</td>
+                                <td>@detail.UnitPrice.Value.ToString("C")</td>
+                                <td>@detail.TotalPrice.Value.ToString("C")</td>
+                                <td>@detail.AddedDate</td>
+                                <td>@detail.IsActive</td>
+                            </tr>
+                        }
+                   
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
